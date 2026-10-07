@@ -1,0 +1,16 @@
+FROM alpine:3.20
+
+ARG INNGEST_VERSION=1.45.1
+ARG TARGETARCH
+
+RUN apk add --no-cache ca-certificates tzdata curl \
+  && ARCH="$( [ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64 )" \
+  && curl -fsSL "https://cli.inngest.com/artifact/v${INNGEST_VERSION}/inngest_${INNGEST_VERSION}_linux_${ARCH}.tar.gz" \
+    | tar -xz -C /usr/local/bin \
+  && chmod +x /usr/local/bin/inngest \
+  && apk del curl
+
+EXPOSE 8288 8289
+
+ENTRYPOINT ["inngest"]
+CMD ["dev", "-u", "http://host.docker.internal:3000/api/inngest"]

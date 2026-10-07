@@ -1,0 +1,27 @@
+node_modules/
+
+# Environment & secrets (keep .env.example)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# Build / generated
+dist/
+coverage/
+*.tsbuildinfo
+/src/generated/prisma/
+
+# Logs & OS
+logs/
+*.log
+.DS_Store
+Thumbs.db
+
+# Local
+*.local
+tmp/
+temp/
