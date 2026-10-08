@@ -33,7 +33,7 @@ services:
        - "6379:6379"
      volumes:
        - redis_data:/data
-     command: redis-server --appendonly yes --requirepass MysecurePassword
+     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
      restart: unless-stopped
 
 volumes:
